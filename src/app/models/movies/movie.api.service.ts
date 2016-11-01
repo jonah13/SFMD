@@ -11,7 +11,8 @@ export class MovieApiService extends ApiService {
    * For example, 'companies:list'
    */
   endpoints: Endpoint = {
-    list: {uri: '?$select=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$group=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$order=title', verb: 'get'}
+    list: {uri: '?$select=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$group=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$order=title', verb: 'get'},
+    view: {uri: '?title=', verb: 'get'},
   };
 
   /**

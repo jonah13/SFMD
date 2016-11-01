@@ -1,3 +1,25 @@
-<p>
-  movies-list works!
-</p>
+<h2>Movies List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Release Year</th>
+      <th>Production Company</th>
+      <th>Director</th>
+      <th>Distributor</th>
+      <th>Writer</th>
+      <th>Main Actors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let movie of movies">
+      <td><a routerLink="/movieDetails/{{movie.title}}">{{movie.title}}</a></td>
+      <td>{{movie.release_year}}</td>
+      <td>{{movie.production_company}}</td>
+      <td>{{movie.director}}</td>
+      <td>{{movie.distributor}}</td>
+      <td>{{movie.writer}}</td>
+      <td>{{movie.actor_1}} {{movie.actor_2}} {{movie.actor_3}}</td>
+    </tr>
+  </tbody>
+</table>

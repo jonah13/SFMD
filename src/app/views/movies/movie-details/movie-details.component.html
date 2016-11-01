@@ -1,0 +1,30 @@
+<h1>Movie Details: </h1>
+<dl>
+  <dt>Title</dt>
+  <dd>{{movie.title}}</dd>
+
+  <dt>Release Year</dt>
+  <dd><span *ngFor="let item of movie.release_year">- {{item}}</span></dd>
+
+  <dt>Locations</dt>
+  <dd><span *ngFor="let item of movie.locations">- {{item}}</span></dd>
+
+  <dt>Fun Facts</dt>
+  <dd><span *ngFor="let item of movie.fun_facts">- {{item}}</span></dd>
+
+  <dt>Production Company</dt>
+  <dd><span *ngFor="let item of movie.production_company">- {{item}}</span></dd>
+
+  <dt>Distributor</dt>
+  <dd><span *ngFor="let item of movie.distributor">- {{item}}</span></dd>
+
+  <dt>Director</dt>
+  <dd><span *ngFor="let item of movie.director">- {{item}}</span></dd>
+
+  <dt>Writer</dt>
+  <dd><span *ngFor="let item of movie.writer">- {{item}}</span></dd>
+
+  <dt>Actors</dt>
+  <dd><span *ngFor="let item of movie.actors">- {{item}}</span></dd>
+
+</dl>
