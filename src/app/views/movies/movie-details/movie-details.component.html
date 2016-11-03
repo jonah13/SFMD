@@ -2,6 +2,9 @@
 <dl>
   <dt>Title</dt>
   <dd>{{movie.title}}</dd>
+  <div *ngIf="movieDetails?.Poster" >
+    <img src="{{movieDetails?.Poster}}">
+  </div>
 
   <dt>Release Year</dt>
   <dd><span *ngFor="let item of movie.release_year">- {{item}}</span></dd>
@@ -26,5 +29,16 @@
 
   <dt>Actors</dt>
   <dd><span *ngFor="let item of movie.actors">- {{item}}</span></dd>
-
 </dl>
+
+<h3>Extra Details</h3>
+<dl>
+  <div *ngFor="let key of movieDetailsKeys">
+    <div *ngIf="key !== 'Poster'">
+      <dt>{{key}}</dt>
+      <dd>{{movieDetails[key]}}</dd>
+    </div>
+  </div>
+</dl>
+
+<app-map *ngIf="movie?.coordinates?.length > 0" [markers]="movie.coordinates"></app-map>

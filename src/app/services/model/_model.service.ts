@@ -92,6 +92,14 @@ export class ModelService {
   list(params: any = {}): void {
     this._api.list(params);
   }
+
+  /**
+   * The kind-specific model service base *list* method.
+   * Invokes the kind-specific API *list* method.
+   */
+  query(params: any = {}): void {
+    this._api.query(params);
+  }
   /**
    * The kind-specific model service base *list* method.
    * Invokes the kind-specific API *list* method.

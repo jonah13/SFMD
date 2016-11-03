@@ -6,28 +6,26 @@ import {HttpService} from '../../services/http/http.service';
 import {CONFIG} from '../../shared/config';
 
 @Injectable()
-export class MovieApiService extends ApiService {
+export class GeocodingApiService extends ApiService {
   /**
    * The kind-specific endpionts list.
    * For example, 'companies:list'
    */
   endpoints: Endpoint = {
-    list: {uri: '?$select=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$group=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$order=title', verb: 'get'},
-    view: {uri: '?title=', verb: 'get'},
-    query: {uri: '/?plot=fill&r=json', verb: 'get'},
+    list: {uri: '&address=', verb: 'get'}
   };
 
   /**
    * The kind-specific error endpoint.
    * Used with the base API class to register error handlers.
    */
-  err: string = 'movies:error';
+  err: string = 'geocoding:error';
 
   /**
    * The kind-specific string.
    * For example, 'messages'
    */
-  kind: string = 'movies';
+  kind: string = 'geocoding';
 
   /**
    * Registers the observer with public `observer$` property.
@@ -44,11 +42,9 @@ export class MovieApiService extends ApiService {
     super(_http);
   }
 
-  query(params:any = {}):void {
+  list(params:any = {}):void {
     console.log('params: ', params);
-    let y = (params.y) ? '&y='+params.y : '';
-    let t = (params.t) ? '&t='+encodeURI(params.t) : '';
-    this._httpService.get(this.endpoints.query.uri+t+y, {}, CONFIG.URI.OMDB)
+    this._httpService.get(this.endpoints.list.uri+params, {}, CONFIG.URI.GOOGLE_GEOCODING)
       .subscribe(data => this._observer.next(data),
         err => this._observer.error(err));
   }

@@ -21,31 +21,32 @@ export class HttpService {
   /**
    * Sets the auth header by default if any RequestOptionArgs is not defined
    * @param options
+   * @param baseUri
    * @returns {{headers: (Headers|{})}|RequestOptionsArgs}
    */
-  requestOptionsArgs(options?:RequestOptionsArgs):any {
-    return _.isEmpty(options) ? {headers: this.getAuthHeaders()} : options;
-  }
-
-  /**
-   * Get headers with bearer token
-   */
-  getAuthHeaders():Headers | {} {
-    let headers = new Headers();
-    headers.append('X-App-Token', CONFIG.API_TOKEN);
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json;charset=utf-8');
-    return headers;
+  requestOptionsArgs(options?:RequestOptionsArgs, baseUri = this.baseUri):any {
+    if (_.isEmpty(options)) {
+      let headers = new Headers();
+      if (baseUri === this.baseUri) {
+        headers.append('X-App-Token', CONFIG.API_TOKEN);
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json;charset=utf-8');
+      }
+      return {headers: headers};
+    } else {
+      return options;
+    }
   }
 
   /**
    * Sends a get request.
    * @param uri
    * @param options
+   * @param baseUri
    * @returns {Observable<R>}
    */
-  get(uri:string, options?:RequestOptionsArgs):Observable<any> {
-    return this._http.get(this.endPointFullUrl(uri), this.requestOptionsArgs(options))
+  get(uri:string, options?:RequestOptionsArgs, baseUri = this.baseUri):Observable<any> {
+    return this._http.get(this.endPointFullUrl(uri, baseUri), this.requestOptionsArgs(options, baseUri))
       .map(response => {
         try {
           return response.json();
@@ -97,10 +98,12 @@ export class HttpService {
   /**
    * concatenates the uri with baseUri
    * @param uri
+   * @param baseUri
    * @returns {string}
    */
-  endPointFullUrl(uri:string):string {
-    console.log(this.baseUri.concat(uri));
-    return this.baseUri.concat(uri);
+  endPointFullUrl(uri:string, baseUri = this.baseUri):string {
+    console.log(uri);
+    console.log(baseUri.concat(uri));
+    return baseUri.concat(uri);
   }
 }
