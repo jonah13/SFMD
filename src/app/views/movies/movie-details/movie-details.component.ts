@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TitleService} from '../../../services/helpers/title.service';
 import {MovieModelService} from '../../../models/movies/movie.model.service';
@@ -7,10 +7,9 @@ import {GeocodingModelService} from '../../../services/geocoding/geocoding.model
 
 @Component({
   selector: 'app-movie-details',
-  templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.sass']
+  templateUrl: './movie-details.component.html'
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
   title: string = '';
   array_keys: string[] = ['release_year', 'locations', 'fun_facts', 'production_company', 'distributor',
     'director', 'writer', 'actor_1', 'actor_2', 'actor_3'];
@@ -31,6 +30,7 @@ export class MovieDetailsComponent implements OnInit {
   };
   movieDetails: any = null;
   movieDetailsKeys: string[] = [];
+  _movieModelServiceSubscription: any;
 
   constructor(private _movieModelService:MovieModelService,
               private _geocodingModelService:GeocodingModelService,
@@ -46,16 +46,20 @@ export class MovieDetailsComponent implements OnInit {
       this.movie.title = this.title;
       this.pageTitle.setTitle('Movie Details: ' + this.movie.title);
     }
-    this._movieModelService.observer$.subscribe(result => this.handleMovieModelResponse(result));
+    this._movieModelServiceSubscription =
+      this._movieModelService.observer$.subscribe(result => this.handleMovieModelResponse(result));
     this._geocodingModelService.observer$.subscribe(result => this.handleGeocodingResponse(result));
+  }
+
+  ngOnDestroy() {
+    this._movieModelServiceSubscription.unsubscribe();
   }
 
   handleMovieModelResponse(result) {
     if (result.Response === 'True') {
       this.movieDetails = result;
       this.movieDetailsKeys = Object.keys(result);
-    }
-    if (result && result.length > 0) {
+    } else if (result && result.length > 0) {
       for(let i = 0; i < result.length; i++) {
         this.array_keys.forEach(key => {
           let target_key = key;
@@ -74,7 +78,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getExtraMovieDetails() {
-    this._movieModelService.query({t:this.movie.title, y:this.movie.release_year[0]});
+    this._movieModelService.viewDetails({t:this.movie.title, y:this.movie.release_year[0]});
   }
   getLocationsGeocoding() {
     for (let i = 0; i < this.movie.locations.length; i++) {
@@ -85,11 +89,9 @@ export class MovieDetailsComponent implements OnInit {
   handleGeocodingResponse(result) {
     if (result && result.results[0] && result.results[0].geometry && result.results[0].geometry.location) {
       let coors = result.results[0].geometry.location;
-      //console.log('coors: ', coors);
       if (this.movie.coordinates.map(c => ''+c.lat+c.lng).indexOf(''+coors.lat+coors.lng) === -1) {
         this.movie.coordinates.push(coors);
       }
     }
-    //console.log(this.movie.coordinates);
   }
 }

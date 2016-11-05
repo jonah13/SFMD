@@ -2,11 +2,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {MovieDetailsComponent} from './views/movies/movie-details/movie-details.component';
 import {MoviesListComponent} from './views/movies/movies-list/movies-list.component';
+import {HomeComponent} from './views/home/home.component';
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: MoviesListComponent
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: 'movies',
@@ -21,6 +22,10 @@ const appRoutes: Routes = [
     data: {
       title: 'Movie Details'
     }
+  },
+  {
+    path: '',
+    component: HomeComponent
   }
 ];
 

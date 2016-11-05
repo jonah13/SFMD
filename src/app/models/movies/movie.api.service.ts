@@ -3,6 +3,7 @@ import {Endpoint} from '../../services/interfaces/interfaces';
 import {ApiService} from '../../services/model/_api.service';
 import {Observable} from 'rxjs/Observable';
 import {HttpService} from '../../services/http/http.service';
+import {LocalStorageService} from '../../services/local-storage/local-storage.service';
 import {CONFIG} from '../../shared/config';
 
 @Injectable()
@@ -12,9 +13,10 @@ export class MovieApiService extends ApiService {
    * For example, 'companies:list'
    */
   endpoints: Endpoint = {
-    list: {uri: '?$select=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$group=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor,writer&$order=title', verb: 'get'},
+    list: {uri: '?$select=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor&$group=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor&$order=title', verb: 'get'},
     view: {uri: '?title=', verb: 'get'},
-    query: {uri: '/?plot=fill&r=json', verb: 'get'},
+    query: {uri: '?', verb: 'get'},
+    viewDetails: {uri: '/?plot=full&r=json', verb: 'get'},
   };
 
   /**
@@ -40,16 +42,41 @@ export class MovieApiService extends ApiService {
   /**
    * The Company API service constructor function, invoked by base classes.
    */
-  constructor(protected _http: HttpService) {
+  constructor(protected _http: HttpService,
+              protected localStorageService: LocalStorageService) {
     super(_http);
   }
 
-  query(params:any = {}):void {
-    console.log('params: ', params);
-    let y = (params.y) ? '&y='+params.y : '';
+  list(params:string = ''):void {
+    this._httpService.get(this.endpoints.list.uri+params, {})
+      .subscribe(data => {
+        data.forEach(m => {
+          if (m['title'] === 'Another 48 Hours') {
+            m['title'] = 'Another 48 Hrs';
+          }
+        });
+        return this._observer.next(data);
+      }, err => this._observer.error(err));
+  }
+
+  viewDetails(params:any = {}):void {
     let t = (params.t) ? '&t='+encodeURI(params.t) : '';
-    this._httpService.get(this.endpoints.query.uri+t+y, {}, CONFIG.URI.OMDB)
-      .subscribe(data => this._observer.next(data),
-        err => this._observer.error(err));
+    let data = this.localStorageService.get_movie(encodeURI(params.t));
+    if (!Date.now) {
+      Date.now = function() { return new Date().getTime(); }
+    }
+    let now = Math.floor(Date.now() / 1000);
+
+    if (data && data['timestamp'] && now - data['timestamp'] < CONFIG.LS_EXPIRATION) {
+      this._observer.next(data);
+    } else {
+      this._httpService.get(this.endpoints.query.uri+t, {}, CONFIG.URI.OMDB)
+        .subscribe(data => {
+          if (data['Response'] === 'True') {
+            this.localStorageService.set_movie(encodeURI(params.t), data);
+          }
+          this._observer.next(data);
+        }, err => this._observer.error(err));
+    }
   }
 }

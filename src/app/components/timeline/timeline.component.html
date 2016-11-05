@@ -1,0 +1,24 @@
+<div class="timeline">
+  <div class="header">
+    <app-menu [menuClass]="'primary'" [elements]="decades" [active]="selectedDecade"
+      (menuItemClicked)="onSelectedDecadeChange($event)">
+    </app-menu>
+    <app-menu [menuClass]="'secondary'" [elements]="years"  [active]="selectedYear"
+              (menuItemClicked)="onSelectedYearChange($event)">
+    </app-menu>
+  </div>
+  <div class="content row">
+    <div class="col col-xs-4">
+      <h3 *ngIf="selectedYear">movies filmed in SF in {{selectedYear}}</h3>
+      <div *ngFor="let movie of moviesByYear[selectedYear]">
+        <app-movie-item [movie]="movie" [active]="selectedMovie === movie.title"
+                        (clicked)="onSelectedMovieChange($event)"></app-movie-item>
+      </div>
+    </div>
+    <div class="col col-xs-4">
+    </div>
+    <div class="col col-xs-4">
+      <app-photo-display [movies]="moviesByYear[selectedYear]" [selectedMovie]="selectedMovie"></app-photo-display>
+    </div>
+  </div>
+</div>

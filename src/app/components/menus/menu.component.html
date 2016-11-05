@@ -1,0 +1,5 @@
+<ul class="{{menuClass}}">
+  <li *ngFor="let elmt of elements" [class.active]="active === elmt">
+    <a href="#" (click)="onClick(elmt)">{{elmt}}</a>
+  </li>
+</ul>

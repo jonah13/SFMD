@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {TitleService} from '../../../services/helpers/title.service';
 import {MovieModelService} from '../../../models/movies/movie.model.service';
 import {Movie} from '../../../models/movies/movie.interface';
 
 @Component({
   selector: 'app-movies-list',
-  templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.sass']
+  templateUrl: './movies-list.component.html'
 })
-export class MoviesListComponent implements OnInit {
-  
+export class MoviesListComponent implements OnInit, OnDestroy {
+
   movies:Movie[] = [];
+  _movieModelServiceSubscription: any;
 
   constructor(private _movieModelService:MovieModelService,
               private pageTitle:TitleService) {
@@ -18,14 +18,18 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._movieModelService.observer$
+    this._movieModelServiceSubscription = this._movieModelService.observer$
       .subscribe(result => this.handleResponse(result));
     this.pageTitle.setTitle('Companies');
     this._movieModelService.list();
   }
 
+  ngOnDestroy() {
+    this._movieModelServiceSubscription.unsubscribe();
+  }
+
   handleResponse(result) {
-    if (result) {
+    if (result && result.length) {
       this.movies = result;
     }
   }

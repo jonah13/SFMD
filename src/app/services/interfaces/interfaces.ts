@@ -12,7 +12,7 @@ export interface Endpoint {
   destroy?: HttpUri;
   logout?: HttpUri;
   login?: HttpUri;
-  verify?: HttpUri;
+  viewDetails?: HttpUri;
   view?: HttpUri;
   query?: HttpUri;
 }
@@ -26,8 +26,7 @@ export interface ApiServiceInterface {
   observer$: Observable<Array<any>>;
   list?(obj: any): void;
   create?(obj: any): void;
-  multiPartCreate?(formData: FormData): void;
-  multiPartUpdate?(formData: FormData): void;
+  viewDetails?(obj: any): void;
   update?(obj: any): void;
   destroy?(id:any, obj: any): void;
   view?(id:any, obj: any): void;

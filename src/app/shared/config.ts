@@ -17,6 +17,12 @@ const URI = {
 };
 
 /**
+ * how long until we update movies data in LS from OMDB 
+ * @type {number}
+ */
+const LS_EXPIRATION = 30*24*60*60; //30 days in seconds
+
+/**
  * Number of items per page in pagination
  * @type {number}
  */
@@ -33,5 +39,6 @@ export const CONFIG = Object.freeze({
   GEOCODING_API_TOKEN: Object.freeze(GEOCODING_API_TOKEN),
   MAP_API_TOKEN: Object.freeze(MAP_API_TOKEN),
   URI: Object.freeze(URI),
+  LS_EXPIRATION: Object.freeze(LS_EXPIRATION),
   PAGINATION: Object.freeze(PAGINATION)
 });
