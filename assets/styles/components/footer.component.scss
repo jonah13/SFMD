@@ -1,0 +1,57 @@
+footer {
+  background: #2b2b2b;
+  position: relative;
+  width: 100%;
+  .wrapper {
+    padding: 50px;
+  }
+  .footer_menu {
+    padding-top: 28px;
+    a {
+      color: #ff543e;
+    }
+  }
+  .disclaimer {
+    color: #a0a0a0;
+    font-size: 11px;
+    font-family: 'Lato', sans-serif;
+    line-height: 13px;
+    padding: 20px 0;
+    a {
+      color: #ff543e;
+    }
+  }
+  .logo {
+    width: 370px;
+    background: #fff;
+    height: 93px;
+    padding: 6px 10px;
+    text-align: center;
+    p {
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 14px;
+      word-spacing: 15px;
+    }
+  }
+
+  #SF_map {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    .overlay {
+      position: absolute;
+      top: 0;
+      height: 300px;
+      width: 100%;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .sebm-google-map-container {
+      position: absolute;
+      top: 0;
+      height: 300px;
+      width: 100%;
+    }
+  }
+}

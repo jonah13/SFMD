@@ -1,0 +1,29 @@
+#intro {
+  height: 960px;
+  background: url('../../../assets/images/bg3.jpg') no-repeat;
+  background-size: cover;
+  top: 90px;
+  position: relative;
+  .intro_text {
+    position: relative;
+    top: 120px;
+    font: normal 24px/29px Roboto,sans-serif;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    h1 {
+      font-size: 55px;
+      font-weight: 900;
+      line-height: 1.2em;
+      margin: 0 0 19px 0;
+      text-transform: uppercase;
+    }
+    p {
+      text-align: justify;
+    }
+    color: #fff;
+  }
+}
+#timeline_section {
+  margin-top: -300px;
+}

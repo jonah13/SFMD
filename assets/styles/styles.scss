@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Open Sans", "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+#body {
+  background: #191919;
+}
+.wrapper {
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.moreButton {
+  font-weight: normal;
+  color: #fff;
+  padding: 0 13px 1px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #ff543e;
+  outline: none;
+  text-decoration: none;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+    background-color: #fff;
+  }
+}
+
+
+
+
