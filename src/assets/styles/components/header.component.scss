@@ -1,0 +1,46 @@
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  background: #191919;
+  height: 95px;
+  border-bottom: 2px solid #ff543e;
+  .logo {
+    background: #fff;
+    height: 93px;
+    padding: 6px 10px;
+    text-align: center;
+    p {
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 14px;
+      word-spacing: 15px;
+    }
+  }
+  nav {
+    position: relative;
+    ul {
+      padding: 37px 0 0 20px;
+      list-style: none;
+      li {
+        padding-bottom: 37px;
+        position: relative;
+        float: right;
+        line-height: 18px;
+        text-align: center;
+        margin-left: 65px;
+        a {
+          font: normal 16px/18px Roboto,sans-serif;
+          color: #fff;
+          padding: 0;
+          border: none;
+          text-transform: uppercase;
+          &.active {
+            color: #ff543e;
+          }
+        }
+      }
+    }
+
+  }
+}

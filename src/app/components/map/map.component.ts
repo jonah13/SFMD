@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-map',
-  templateUrl: './map.component.html'
+  templateUrl: './map.component.html',
+  styleUrls: ['../../../assets/styles/components/map.component.scss']
 })
 export class MapComponent implements OnInit {
   @Input() centerLat: number = 37.7720849;

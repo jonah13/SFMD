@@ -1,0 +1,129 @@
+.movie_details {
+  padding: 95px 0;
+  .top_section {
+    background: #3b3b3b;
+    h1.title {
+      color: #fff;
+      margin: 50px 0 0px 20px;
+    }
+    .rating {
+      padding: 20px 50px 0 0;
+      color: #fff;
+      text-align: right;
+      .rating_site {
+        border: 1px solid #565656;
+        border-radius: 3px;
+        color: #565656;
+        font-size: 12px;
+        display: inline-block;
+        padding: 1px 2px 2px;
+        margin-bottom: 3px;
+        &.metascore {
+          color: #fff;
+          font-size: 14px;
+          padding: 4px;
+          span {
+            padding: 3px 6px 3px 4px;
+            background: #ff543e;
+            margin-left: 18px;
+          }
+        }
+        &.imdbRating {
+          span {
+            color: #fff;
+            font-size: 14px;
+            padding: 0px 5px 0;
+            display: inline-block;
+            line-height: 25px;
+          }
+        }
+        &.tomatoRating {
+          padding: 0 2px 0 10px;
+          span {
+            color: #fff;
+            font-size: 14px;
+            padding: 0px 5px 0;
+            display: inline-block;
+            line-height: 25px;
+            margin-left: 6px;
+          }
+        }
+      }
+
+
+
+    }
+    .more_info {
+      color: #C0C0C0;
+      padding: 5px 5px 10px 40px;
+      font-weight: 300;
+      font-size: 13px;
+    }
+    .urls {
+      text-align: right;
+      padding-right: 50px;
+      padding-bottom: 10px;
+    }
+  }
+  .poster_section {
+    background: #252525;
+    .poster {
+      width: 360px;
+      p {
+        width: 320px;
+        height: 400px;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 50px;
+      }
+      div {
+        width: 320px;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .details {
+      margin: 40px 0;
+      color: #C0C0C0;
+      font-weight: 200;
+      .label {
+        padding: 0 5px 0 0;
+        font-size: 15px;
+        color: #fff;
+      }
+    }
+  }
+  .filming_locations {
+    background: #fff;
+    h2 {
+      color: #ff543e;
+      margin: 20px 0 20px 30px;
+    }
+    ul {
+      list-style-position: inside;
+    }
+    .sebm-google-map-container {
+      width: 100%;
+    }
+  }
+  .details_section {
+    padding: 30px;
+    background: #3b3b3b;
+    color: #C0C0C0;
+    font-weight: 200;
+    h2 {
+      color: #ff543e;
+      padding: 0 0 20px 0;
+    }
+    h3 {
+      color: #ff543e;
+    }
+    .label {
+      padding: 0 5px 0 0;
+      font-size: 15px;
+      color: #fff;
+    }
+  }
+}

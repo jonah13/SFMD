@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {MovieModelService} from '../../models/movies/movie.model.service';
 import * as _ from 'lodash';
 
 @Component({
   selector: 'app-timeline',
-  templateUrl: './timeline.component.html'
+  encapsulation: ViewEncapsulation.None,
+  templateUrl: './timeline.component.html',
+  styleUrls: ['../../../assets/styles/components/timeline.component.scss']
 })
 export class TimelineComponent {
   decades: string[] = [
@@ -66,7 +68,8 @@ export class TimelineComponent {
 
   handleResponse(response) {
     if (response.Response === 'True') {
-      let index = _.findIndex(this.moviesByYear[this.selectedYear], m => response['Title'].indexOf(m['title']) !== -1);
+      let index = _.findIndex(this.moviesByYear[this.selectedYear], m => response['Title'].toLowerCase().replace('!', '').replace('?', '')
+        .indexOf(m['title'].replace('!', '').replace('?', '').toLowerCase()) !== -1);
       if (index !== -1) {
         this.moviesByYear[this.selectedYear][index]['moreDetails'] = response;
       }

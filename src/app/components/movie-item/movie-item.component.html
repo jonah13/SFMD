@@ -1,18 +1,17 @@
 <div class="movieItem">
-  <a href="#" (click)="onSelectMovie()">{{movie.title}}</a>
+  <a class="title" href="#" (click)="onSelectMovie()">{{movie.title}}</a>
   <div *ngIf="active" class="details">
     <dl *ngIf="movie?.moreDetails?.Plot">
-      <dt>Plot:</dt>
       <dd>{{movie?.moreDetails?.Plot}}</dd>
     </dl>
     <dl *ngIf="movie?.actor_1">
-      <dt>Main Actors:</dt>
+      <dt>Starring:</dt>
       <dd>
         <span>{{movie.actor_1}}</span>
         <span *ngIf="movie.actor_2">, {{movie.actor_2}}</span>
         <span *ngIf="movie.actor_3">, {{movie.actor_3}}</span>
       </dd>
     </dl>
-    <a routerLink="/movieDetails/{{movie.title}}">More Details..</a>
+    <a class="moreButton" routerLink="/movieDetails/{{movie.title}}">More ...</a>
   </div>
 </div>

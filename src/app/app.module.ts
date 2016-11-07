@@ -20,8 +20,14 @@ import {HomeComponent} from './views/home/home.component';
 import {TimelineComponent} from './components/timeline/timeline.component';
 import {MenuComponent} from './components/menus/menu.component';
 import {LocalStorageService} from './services/local-storage/local-storage.service';
-import { MovieItemComponent } from './components/movie-item/movie-item.component';
-import { PhotoDisplayComponent } from './components/photo-display/photo-display.component';
+import {MovieItemComponent} from './components/movie-item/movie-item.component';
+import {PhotoDisplayComponent} from './components/photo-display/photo-display.component';
+import {DataTableModule} from "angular2-datatable";
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchComponent } from './components/search/search.component';
+import { QueryFilterPipe } from './pipes/query-filter.pipe';
+import { FormatRatingPipe } from './pipes/format-rating.pipe';
 
 
 @NgModule({
@@ -34,13 +40,19 @@ import { PhotoDisplayComponent } from './components/photo-display/photo-display.
     MovieDetailsComponent,
     MapComponent,
     MovieItemComponent,
-    PhotoDisplayComponent
+    PhotoDisplayComponent,
+    HeaderComponent,
+    FooterComponent,
+    SearchComponent,
+    QueryFilterPipe,
+    FormatRatingPipe
   ],
   imports: [
     routing,
     BrowserModule,
     FormsModule,
     HttpModule,
+    DataTableModule,
     AgmCoreModule.forRoot({
       apiKey: CONFIG.MAP_API_TOKEN
     })
