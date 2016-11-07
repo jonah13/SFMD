@@ -2,8 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['../../../assets/styles/components/menu.component.scss']
+  templateUrl: './menu.component.html'
 })
 export class MenuComponent {
   @Input() menuClass: string = 'default';

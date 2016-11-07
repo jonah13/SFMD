@@ -2,29 +2,178 @@
 body {
   font-family: "Open Sans", "Trebuchet MS", Helvetica, Arial, sans-serif;
 }
-#body {
-  background: #191919;
+.sebm-google-map-container {
+  height: 400px;
+  width: 600px;
 }
-.wrapper {
-  width: 1170px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.moreButton {
-  font-weight: normal;
-  color: #fff;
-  padding: 0 13px 1px;
-  display: inline-block;
-  vertical-align: top;
-  background-color: #ff543e;
-  outline: none;
-  text-decoration: none;
-  &:hover, &:active, &:focus {
-    text-decoration: none;
-    background-color: #fff;
+.timeline {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 20px solid #2d3f51;
+  .header {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        display: inline-block;
+        text-align: center;
+        height: 60px;
+        a {
+          color: #fff;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 20px;
+        }
+      }
+      &.primary {
+        height: 60px;
+        background: #3598db;
+        li {
+          width: 9.08%;
+          border-right: 1px solid #2d3f51;
+          &:last-child {
+            border-right: none;
+          }
+          &.active {
+            background: #2d3f51;
+          }
+          a {
+            padding-top: 17px;
+          }
+        }
+      }
+      &.secondary {
+        height: 30px;
+        background: #2d3f51;
+        text-align: center;
+        li {
+          a {
+            padding-top: 7px;
+            font-size: 14px;
+            color: #3598db;
+          }
+          width: 10%;
+          &.active a{
+            color: #fff;
+            position: relative;
+            &:after {
+              content: "\25BC";
+              color: #2d3f51;
+              position: absolute;
+              font-size: 20px;
+              left: 20%;
+              top: 20px;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+  .content {
+    background: #ecf0f1;
+    margin: 0;
+    padding: 10px 30px;
+    min-height: 400px;
+    color: #304254;
   }
 }
-
-
+.movieItem {
+  .details {
+    background: #fff;
+    border-radius: 20px 0 0 20px;
+    padding: 20px;
+    margin: 5px 0 5px 30px;
+    width: 101%;
+  }
+}
+@keyframes moveElement {
+  from {right: 50px;}
+  to {right: 500px;}
+}
+.photoDisplay {
+  margin-left: 50px;
+  margin-top: 20px;
+  .photos {
+    padding: 15px;
+    border: 1px solid #C8C8C8;
+    background-color: #FFF;
+    float: right;
+    position: absolute;
+    min-width: 200px;
+    min-height: 300px;
+    img {
+      width: 200px;
+    }
+    .posterReplacement {
+      width: 200px;
+      height: 240px;
+      background: #3598db;
+      padding: 20px;
+      font-size: 24px;
+      color: #fff;
+      text-align: center;
+      vertical-align: middle;
+      display: table-cell;
+    }
+    &:hover {
+      z-index: 10;
+    }
+    &.selected {
+      top: 70px;
+      right: 500px;
+      z-index: 20;
+      transition: all .3s ease-in-out;
+      transform: scale(1.2);
+      animation-name: moveElement;
+      animation-duration: .3s;
+      padding: 40px;
+      border-radius: 20px;
+      background: #fff;
+      border: none;
+      width: 280px;
+      margin-right: 0;
+    }
+  }
+  .photo0 {
+    margin-top: 20px;
+    position: absolute;
+  }
+  .photo1 {
+    transform:rotate(10deg);
+    -ms-transform:rotate(10deg); /* IE 9 */
+    -moz-transform:rotate(10deg); /* Firefox */
+    -webkit-transform:rotate(10deg); /* Safari and Chrome */
+    -o-transform:rotate(10deg); /* Opera */
+    margin-right: 100px;
+    margin-top: 20px;
+  }
+  .photo2 {
+    transform:rotate(-10deg);
+    -ms-transform:rotate(-10deg); /* IE 9 */
+    -moz-transform:rotate(-10deg); /* Firefox */
+    -webkit-transform:rotate(-10deg); /* Safari and Chrome */
+    -o-transform:rotate(-10deg); /* Opera */
+    margin-top: 20px;
+  }
+  .photo3 {
+    transform:rotate(5deg);
+    -ms-transform:rotate(5deg); /* IE 9 */
+    -moz-transform:rotate(5deg); /* Firefox */
+    -webkit-transform:rotate(5deg); /* Safari and Chrome */
+    -o-transform:rotate(5deg); /* Opera */
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+  .photo4 {
+    transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg); /* IE 9 */
+    -moz-transform:rotate(-5deg); /* Firefox */
+    -webkit-transform:rotate(-5deg); /* Safari and Chrome */
+    -o-transform:rotate(-5deg); /* Opera */
+    margin-top: 20px;
+  }
+}
 
 

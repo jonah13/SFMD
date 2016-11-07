@@ -8,14 +8,16 @@
     </app-menu>
   </div>
   <div class="content row">
-    <div class="col col-xs-6">
-      <h3 *ngIf="selectedYear">movies filmed in San Francisco in {{selectedYear}}</h3>
+    <div class="col col-xs-4">
+      <h3 *ngIf="selectedYear">movies filmed in SF in {{selectedYear}}</h3>
       <div *ngFor="let movie of moviesByYear[selectedYear]">
         <app-movie-item [movie]="movie" [active]="selectedMovie === movie.title"
                         (clicked)="onSelectedMovieChange($event)"></app-movie-item>
       </div>
     </div>
-    <div class="col col-xs-6 photos_section">
+    <div class="col col-xs-4">
+    </div>
+    <div class="col col-xs-4">
       <app-photo-display [movies]="moviesByYear[selectedYear]" [selectedMovie]="selectedMovie"></app-photo-display>
     </div>
   </div>

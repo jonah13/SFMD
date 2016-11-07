@@ -16,7 +16,7 @@ export class MovieApiService extends ApiService {
     list: {uri: '?$select=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor&$group=title,release_year,production_company,actor_1,actor_2,actor_3,director,distributor&$order=title', verb: 'get'},
     view: {uri: '?title=', verb: 'get'},
     query: {uri: '?', verb: 'get'},
-    viewDetails: {uri: '/?plot=full&tomatoes=true&r=json', verb: 'get'},
+    viewDetails: {uri: '/?plot=full&r=json', verb: 'get'},
   };
 
   /**
@@ -70,7 +70,7 @@ export class MovieApiService extends ApiService {
     if (data && data['timestamp'] && now - data['timestamp'] < CONFIG.LS_EXPIRATION) {
       this._observer.next(data);
     } else {
-      this._httpService.get(this.endpoints.viewDetails.uri+t, {}, CONFIG.URI.OMDB)
+      this._httpService.get(this.endpoints.query.uri+t, {}, CONFIG.URI.OMDB)
         .subscribe(data => {
           if (data['Response'] === 'True') {
             this.localStorageService.set_movie(encodeURI(params.t), data);

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TitleService} from '../../../services/helpers/title.service';
 import {MovieModelService} from '../../../models/movies/movie.model.service';
@@ -7,9 +7,7 @@ import {GeocodingModelService} from '../../../services/geocoding/geocoding.model
 
 @Component({
   selector: 'app-movie-details',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './movie-details.component.html',
-  styleUrls: ['../../../../assets/styles/pages/movie-details.component.scss']
+  templateUrl: './movie-details.component.html'
 })
 export class MovieDetailsComponent implements OnInit, OnDestroy {
   title: string = '';
@@ -77,35 +75,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       this.getExtraMovieDetails();
       //console.log(this.movie);
     }
-  }
-
-  /**
-   * returns movies detail by priority, if it's array returns elements as string
-   * @param index1
-   * @param index2
-   * @returns {any}
-   */
-  getDetail(index1: string, index2:string): string | boolean {
-    if (this.movieDetails && this.movieDetails[index1]) {
-      return this.movieDetails[index1];
-    }
-    if (this.movie[index2]) {
-      if (Array.isArray(this.movie[index2])) {
-        if (this.movie[index2].length < 1) {
-          return false
-        }
-        let text = '';
-        for (let i = 0; i < this.movie[index2].length; i++) {
-          if (i > 0) {
-            text += ', ';
-          }
-          text += this.movie[index2][i];
-        }
-        return text;
-      }
-      return this.movie[index2];
-    }
-    return false;
   }
 
   getExtraMovieDetails() {
