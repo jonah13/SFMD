@@ -34,6 +34,9 @@
       margin-right: 0;
       margin-top: 40px;
     }
+    &.hovered {
+      z-index: 5;
+    }
   }
   .photo0 {
     margin-top: 20px;
