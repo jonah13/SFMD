@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import {CONFIG} from '../../shared/config';
 
 @Component({
   selector: 'app-map',
@@ -19,4 +20,6 @@ export class MapComponent {
    * list of markers
    */
   @Input() markers: {lat:number, lng:number}[] = [];
+
+  path: string = CONFIG.ASSETS_PATH;
 }
