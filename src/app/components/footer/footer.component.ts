@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import {CONFIG} from '../../shared/config';
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +8,5 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['../../../assets/styles/components/footer.component.scss']
 })
 export class FooterComponent {
+  path: string = CONFIG.ASSETS_PATH;
 }
