@@ -1,4 +1,6 @@
+import {environment} from '../../environments/environment';
 /**
+ * APIs
  * @type {string}
  */
 const API_TOKEN = 'wHQgTE2hulzUHubY0WTZTNXHU';
@@ -17,10 +19,16 @@ const URI = {
 };
 
 /**
- * how long until we update movies data in LS from OMDB 
+ * how long until we update movies data in LS from OMDB
  * @type {number}
  */
 const LS_EXPIRATION = 30*24*60*60; //30 days in seconds
+
+/**
+ * assets path, change accordingly for dev/prod
+ * @type {string}
+ */
+const ASSETS_PATH = environment.production ? '/assignment' : '';
 
 /**
  * Number of items per page in pagination
@@ -40,5 +48,6 @@ export const CONFIG = Object.freeze({
   MAP_API_TOKEN: Object.freeze(MAP_API_TOKEN),
   URI: Object.freeze(URI),
   LS_EXPIRATION: Object.freeze(LS_EXPIRATION),
+  ASSETS_PATH: Object.freeze(ASSETS_PATH),
   PAGINATION: Object.freeze(PAGINATION)
 });

@@ -31,7 +31,7 @@ export class MovieModelService extends ModelService {
   protected _dataStore:Movie[] = [];
 
   /**
-   * The BusinessModel service constructor function, invokes the base Model.
+   * The Movie service constructor function, invokes the base Model.
    */
   constructor(_api:MovieApiService) {
     super(_api);

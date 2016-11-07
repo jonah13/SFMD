@@ -102,8 +102,6 @@ export class HttpService {
    * @returns {string}
    */
   endPointFullUrl(uri:string, baseUri = this.baseUri):string {
-    console.log(uri);
-    console.log(baseUri.concat(uri));
     return baseUri.concat(uri);
   }
 }

@@ -4,6 +4,7 @@ import {TitleService} from '../../../services/helpers/title.service';
 import {MovieModelService} from '../../../models/movies/movie.model.service';
 import {Movie} from '../../../models/movies/movie.interface';
 import {GeocodingModelService} from '../../../services/geocoding/geocoding.model.service';
+import {CONFIG} from '../../../shared/config';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,9 +13,18 @@ import {GeocodingModelService} from '../../../services/geocoding/geocoding.model
   styleUrls: ['../../../../assets/styles/pages/movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit, OnDestroy {
+  /**
+   * holds the movie title parameter
+   */
   title: string = '';
+  /**
+   * movie object keys that are arrays
+   */
   array_keys: string[] = ['release_year', 'locations', 'fun_facts', 'production_company', 'distributor',
     'director', 'writer', 'actor_1', 'actor_2', 'actor_3'];
+  /**
+   * object to hold movie returned from api
+   */
   movie: Movie = <Movie>{
     title: '',
     release_year: [],
@@ -30,10 +40,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     actor_2: '',
     actor_3: ''
   };
+  /**
+   * object to hold additional movie details from secondary api
+   */
   movieDetails: any = null;
-  movieDetailsKeys: string[] = [];
+  /**
+   * service subscription that will allow up to unsubscribe when needed
+   */
   _movieModelServiceSubscription: any;
+  /**
+   * assets relative path
+   */
+  path: string = CONFIG.ASSETS_PATH;
 
+  /**
+   * injecting needed services and setting up page title
+   * @param _movieModelService
+   * @param _geocodingModelService
+   * @param _route
+   * @param pageTitle
+   */
   constructor(private _movieModelService:MovieModelService,
               private _geocodingModelService:GeocodingModelService,
               private _route:ActivatedRoute,
@@ -41,6 +67,9 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.pageTitle.setTitle('Movie Details');
   }
 
+  /**
+   * getting title param, calling APIs on page load 
+   */
   ngOnInit() {
     this.title = this._route.snapshot.params['title'];
     if (this.title) {
@@ -51,17 +80,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this._movieModelServiceSubscription =
       this._movieModelService.observer$.subscribe(result => this.handleMovieModelResponse(result));
     this._geocodingModelService.observer$.subscribe(result => this.handleGeocodingResponse(result));
+    this._movieModelService.viewDetails({t: this.movie.title});
   }
 
+  /**
+   * actions to be performed when we leave the page 
+   */
   ngOnDestroy() {
     this._movieModelServiceSubscription.unsubscribe();
   }
 
-  handleMovieModelResponse(result) {
+  /**
+   * handling API response
+   * @param result
+   */
+  handleMovieModelResponse(result): void {
     if (result.Response === 'True') {
+      //secondary API response
       this.movieDetails = result;
-      this.movieDetailsKeys = Object.keys(result);
     } else if (result && result.length > 0) {
+      //primary API response, we format movie object as needed
       for(let i = 0; i < result.length; i++) {
         this.array_keys.forEach(key => {
           let target_key = key;
@@ -73,9 +111,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
           }
         });
       }
+      //calling additional APIs
       this.getLocationsGeocoding();
-      this.getExtraMovieDetails();
-      //console.log(this.movie);
     }
   }
 
@@ -108,15 +145,19 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  getExtraMovieDetails() {
-    this._movieModelService.viewDetails({t:this.movie.title, y:this.movie.release_year[0]});
-  }
+  /**
+   * getting locations coordinates on the map from Google Maps API
+   */
   getLocationsGeocoding() {
     for (let i = 0; i < this.movie.locations.length; i++) {
       this._geocodingModelService.list(encodeURIComponent(this.movie.locations[i]+', San Francisco, CA, USA'));
     }
   }
 
+  /**
+   * handling Google Maps API Response
+   * @param result
+   */
   handleGeocodingResponse(result) {
     if (result && result.results[0] && result.results[0].geometry && result.results[0].geometry.location) {
       let coors = result.results[0].geometry.location;

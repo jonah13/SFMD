@@ -13,16 +13,16 @@
           </div>
           <div *ngIf="movieDetails?.imdbRating">
             <p class="rating_site imdbRating">
-              <img src="../../../../assets/images/imdb.png">
+              <img src="{{path}}/assets/images/imdb.png">
               <span>{{movieDetails?.imdbRating | formatRating}}</span>/10
-              <img src="../../../../assets/images/star.png">
+              <img src="{{path}}/assets/images/star.png">
             </p>
           </div>
           <div *ngIf="movieDetails?.tomatoRating">
             <p class="rating_site tomatoRating">
-              <img src="../../../../assets/images/rt.png" height="25">
+              <img src="{{path}}/assets/images/rt.png" height="25">
               <span>{{movieDetails?.tomatoRating | formatRating}}</span>/10
-              <img src="../../../../assets/images/star.png">
+              <img src="{{path}}/assets/images/star.png">
             </p>
           </div>
 
@@ -55,17 +55,17 @@
             <span class="label">External Links: </span>
             <span *ngIf="movieDetails?.imdbID">
               <a target="_blank" href="http://http://www.imdb.com/title/{{movieDetails?.imdbID}}">
-                <img src="../../../../assets/images/imdb.png">
+                <img src="{{path}}/assets/images/imdb.png">
               </a>
             </span>
             <span *ngIf="movieDetails?.tomatoURL && movieDetails?.tomatoURL !== 'N/A'">
               <a target="_blank" href="{{movieDetails?.tomatoURL}}">
-                <img src="../../../../assets/images/rt.png" height="25">
+                <img src="{{path}}/assets/images/rt.png" height="25">
               </a>
             </span>
             <span *ngIf="movieDetails?.Website && movieDetails?.Website !== 'N/A'">
               <a target="_blank" href="{{movieDetails?.Website}}">
-                <img src="../../../../assets/images/w.png">
+                <img src="{{path}}/assets/images/w.png">
               </a>
             </span>
           </p>

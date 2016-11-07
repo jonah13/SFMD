@@ -30,7 +30,7 @@ export class GeocodingModelService extends ModelService {
   protected _dataStore:any[] = [];
 
   /**
-   * The BusinessModel service constructor function, invokes the base Model.
+   * The Geocoding service constructor function, invokes the base Model.
    */
   constructor(_api:GeocodingApiService) {
     super(_api);

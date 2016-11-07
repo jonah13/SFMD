@@ -41,21 +41,7 @@ export class ApiService implements ApiServiceInterface {
    */
   constructor(protected _httpService:HttpService) {
   }
-
-  /**
-   * Registers error handlers with the socket service.
-   * All kinds have a generic catch-all error handler.
-   */
-  //registerErrors(): void {
-  //  this._httpService.registerError(this.err, this.receivedError.bind(this));
-  //}
-
-  /**
-   * The error event handler.
-   */
-  //receivedError(err: any): void {
-  //  alert(JSON.stringify(err));
-  //}
+  
 
   /**
    * The Base API List method. Invokes the API to list resources.

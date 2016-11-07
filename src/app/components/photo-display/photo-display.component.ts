@@ -5,8 +5,14 @@ import { Component, Input } from '@angular/core';
   templateUrl: './photo-display.component.html',
   styleUrls: ['../../../assets/styles/components/photo-display.component.scss']
 })
-export class PhotoDisplayComponent {
+export class PhotoDisplayComponent 
+{
+  /**
+   * movies array to get photos from
+   */
   @Input() movies: any[] = [];
+  /**
+   * selected movie to highlight
+   */
   @Input() selectedMovie: any = null;
-  
 }

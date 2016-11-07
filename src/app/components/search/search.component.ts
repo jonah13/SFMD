@@ -6,10 +6,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['../../../assets/styles/components/search.component.scss']
 })
 export class SearchComponent {
+  /**
+   * placeholder text
+   */
   @Input('placeholder') placeholder = 'Filter ...';
+  /**
+   * event fired when query changes
+   */
   @Output() queryChanged = new EventEmitter<string>();
 
-  onQueryChanged(query:string) {
+  /**
+   * actions to perform on query change
+   * @param query
+   */
+  onQueryChanged(query: string) {
     this.queryChanged.emit(query);
   }
 }

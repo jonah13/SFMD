@@ -40,7 +40,7 @@ export class MovieApiService extends ApiService {
     this._observer = observer).share();
 
   /**
-   * The Company API service constructor function, invoked by base classes.
+   * The Movie API service constructor function, invoked by base classes.
    */
   constructor(protected _http: HttpService,
               protected localStorageService: LocalStorageService) {

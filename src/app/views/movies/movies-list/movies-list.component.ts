@@ -10,15 +10,28 @@ import {Movie} from '../../../models/movies/movie.interface';
   styleUrls: ['../../../../assets/styles/pages/movies-list.component.scss']
 })
 export class MoviesListComponent implements OnInit, OnDestroy {
-
+  /**
+   * array to hold list of movies
+   */
   movies:Movie[] = [];
+  /**
+   * list of keys we want to be able to search in
+   */
   queryTargets: string[] = ['title', 'release_year', 'production_company', 'director', 'distributor', 'actor_1', 'actor_2', 'actor_3'];
   _movieModelServiceSubscription: any;
 
+  /**
+   * injecting needed services
+   * @param _movieModelService
+   * @param pageTitle
+   */
   constructor(private _movieModelService:MovieModelService,
               private pageTitle:TitleService) {
   }
 
+  /**
+   * actions to perform on page init
+   */
   ngOnInit() {
     this._movieModelServiceSubscription = this._movieModelService.observer$
       .subscribe(result => this.handleResponse(result));
@@ -26,11 +39,18 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     this._movieModelService.list();
   }
 
+  /**
+   * actions to perform before leaving the page
+   */
   ngOnDestroy() {
     this._movieModelServiceSubscription.unsubscribe();
   }
 
-  handleResponse(result) {
+  /**
+   * handling API response
+   * @param result
+   */
+  handleResponse(result: any) {
     if (result && result.length) {
       this.movies = result;
     }

@@ -36,7 +36,7 @@ export class GeocodingApiService extends ApiService {
     this._observer = observer).share();
 
   /**
-   * The Company API service constructor function, invoked by base classes.
+   * The geocoding API service constructor function, invoked by base classes.
    */
   constructor(protected _http: HttpService) {
     super(_http);

@@ -1,5 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
+/*
+ * format rating to avoid displaying N/A or undefined
+ * Usage:
+ *   rating | formatRating
+ */
 @Pipe({
   name: 'formatRating'
 })
