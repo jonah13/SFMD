@@ -18,6 +18,10 @@ export class MovieItemComponent {
    * event to fire when a movie is selected
    */
   @Output() clicked = new EventEmitter<string>();
+  /**
+   * event to fire when a movie is hovered
+   */
+  @Output() hovered = new EventEmitter<string>();
 
   /**
    * actions to perform when a movie is clicked
@@ -25,6 +29,15 @@ export class MovieItemComponent {
    */
   onSelectMovie(): boolean {
     this.clicked.emit(this.movie.title);
+    return false;
+  }
+
+  /**
+   * actions to perform when a movie is clicked
+   * @returns {boolean}
+   */
+  onHoveredMovie(): boolean {
+    this.hovered.emit(this.movie.title);
     return false;
   }
 }

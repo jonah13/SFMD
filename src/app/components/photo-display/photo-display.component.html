@@ -1,5 +1,6 @@
 <div class="photoDisplay">
-  <div  *ngFor="let movie of movies, let i = index" class="photos photo{{i%5}}" [class.selected]="movie.title === selectedMovie">
+  <div  *ngFor="let movie of movies, let i = index"
+        class="photos photo{{i%5}}" [class.selected]="movie.title === selectedMovie" [class.hovered]="movie.title === hoveredMovie">
     <img *ngIf="movie?.moreDetails?.Poster && movie?.moreDetails?.Poster !== 'N/A'"
          src="{{movie?.moreDetails?.Poster}}" alt=""/>
     <div *ngIf="!movie?.moreDetails?.Poster || movie?.moreDetails?.Poster === 'N/A'"

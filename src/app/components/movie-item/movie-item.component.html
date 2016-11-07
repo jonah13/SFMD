@@ -1,5 +1,5 @@
 <div class="movieItem">
-  <a class="title" href="#" (click)="onSelectMovie()">{{movie.title}}</a>
+  <a class="title" href="#" (click)="onSelectMovie()" (mouseover)="onHoveredMovie()">{{movie.title}}</a>
   <div *ngIf="active" class="details">
     <dl *ngIf="movie?.moreDetails?.Plot">
       <dd>{{movie?.moreDetails?.Plot}}</dd>

@@ -11,12 +11,13 @@
     <div class="col col-xs-6">
       <h3 *ngIf="selectedYear">movies filmed in San Francisco in {{selectedYear}}</h3>
       <div *ngFor="let movie of moviesByYear[selectedYear]">
-        <app-movie-item [movie]="movie" [active]="selectedMovie === movie.title"
+        <app-movie-item [movie]="movie" [active]="selectedMovie === movie.title" (hovered)="hoveredMovie = $event"
                         (clicked)="onSelectedMovieChange($event)"></app-movie-item>
       </div>
     </div>
     <div class="col col-xs-6 photos_section">
-      <app-photo-display [movies]="moviesByYear[selectedYear]" [selectedMovie]="selectedMovie"></app-photo-display>
+      <app-photo-display [movies]="moviesByYear[selectedYear]" [selectedMovie]="selectedMovie"
+                         [hoveredMovie]="hoveredMovie"></app-photo-display>
     </div>
   </div>
 </div>

@@ -23,6 +23,7 @@ export class TimelineComponent {
   selectedYear: string = '';
   selectedDecade: string = '';
   selectedMovie: string = '';
+  hoveredMovie: string = '';
   /**
    * movie model subscription, will allow us to unsubscribe when needed
    */

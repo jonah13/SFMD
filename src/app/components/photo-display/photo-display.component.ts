@@ -15,4 +15,8 @@ export class PhotoDisplayComponent
    * selected movie to highlight
    */
   @Input() selectedMovie: any = null;
+  /**
+   * hovered movie to highlight
+   */
+  @Input() hoveredMovie: any = null;
 }
