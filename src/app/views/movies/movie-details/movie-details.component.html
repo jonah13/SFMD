@@ -1,44 +1,117 @@
-<h1>Movie Details: </h1>
-<dl>
-  <dt>Title</dt>
-  <dd>{{movie.title}}</dd>
-  <div *ngIf="movieDetails?.Poster" >
-    <img src="{{movieDetails?.Poster}}">
-  </div>
+<app-header></app-header>
+<div id="body">
+  <div class="wrapper movie_details">
 
-  <dt>Release Year</dt>
-  <dd><span *ngFor="let item of movie.release_year">- {{item}}</span></dd>
+    <div class="top_section">
+      <div class="row">
+        <div class="col col-sm-10">
+          <h1 class="title">{{movie.title}} <span *ngIf="movie?.release_year">({{movie.release_year}})</span></h1>
+        </div>
+        <div class="rating col col-sm-2">
+          <div *ngIf="movieDetails?.Metascore">
+            <p class="rating_site metascore">Metascore: <span>{{movieDetails?.Metascore}}</span></p>
+          </div>
+          <div *ngIf="movieDetails?.imdbRating">
+            <p class="rating_site imdbRating">
+              <img src="../../../../assets/images/imdb.png">
+              <span>{{movieDetails?.imdbRating | formatRating}}</span>/10
+              <img src="../../../../assets/images/star.png">
+            </p>
+          </div>
+          <div *ngIf="movieDetails?.tomatoRating">
+            <p class="rating_site tomatoRating">
+              <img src="../../../../assets/images/rt.png" height="25">
+              <span>{{movieDetails?.tomatoRating | formatRating}}</span>/10
+              <img src="../../../../assets/images/star.png">
+            </p>
+          </div>
 
-  <dt>Locations</dt>
-  <dd><span *ngFor="let item of movie.locations">- {{item}}</span></dd>
-
-  <dt>Fun Facts</dt>
-  <dd><span *ngFor="let item of movie.fun_facts">- {{item}}</span></dd>
-
-  <dt>Production Company</dt>
-  <dd><span *ngFor="let item of movie.production_company">- {{item}}</span></dd>
-
-  <dt>Distributor</dt>
-  <dd><span *ngFor="let item of movie.distributor">- {{item}}</span></dd>
-
-  <dt>Director</dt>
-  <dd><span *ngFor="let item of movie.director">- {{item}}</span></dd>
-
-  <dt>Writer</dt>
-  <dd><span *ngFor="let item of movie.writer">- {{item}}</span></dd>
-
-  <dt>Actors</dt>
-  <dd><span *ngFor="let item of movie.actors">- {{item}}</span></dd>
-</dl>
-
-<h3>Extra Details</h3>
-<dl>
-  <div *ngFor="let key of movieDetailsKeys">
-    <div *ngIf="key !== 'Poster'">
-      <dt>{{key}}</dt>
-      <dd>{{movieDetails[key]}}</dd>
+        </div>
+      </div>
+      <div class="row">
+        <div class="more_info col col-sm-10">
+          <span *ngIf="movieDetails?.Type">{{movieDetails?.Type}} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
+          <span *ngIf="movieDetails?.Rated">{{movieDetails?.Rated}} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
+          <span *ngIf="movieDetails?.Runtime">{{movieDetails?.Runtime}} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
+          <span *ngIf="movieDetails?.Genre">{{movieDetails?.Genre}}</span>
+        </div>
+      </div>
     </div>
-  </div>
-</dl>
 
-<app-map *ngIf="movie?.coordinates?.length > 0" [markers]="movie.coordinates"></app-map>
+    <div class="poster_section">
+      <div class="row">
+        <div class="poster col col-sm-4">
+          <p *ngIf="!movieDetails?.Poster">{{movie.title}}</p>
+          <div *ngIf="movieDetails?.Poster">
+            <img src="{{movieDetails?.Poster}}">
+          </div>
+        </div>
+        <div class="details col col-sm-8">
+          <p *ngIf="movieDetails?.Plot" class="plot">{{movieDetails?.Plot}}</p>
+          <p *ngIf="getDetail('Director', 'director')"><span class="label">Directors: </span> {{getDetail('Director', 'director')}}</p>
+          <p *ngIf="getDetail('Writer', 'writer')"><span class="label">Writers: </span> {{getDetail('Writer', 'writer')}}</p>
+          <p *ngIf="getDetail('Actors', 'actors')"><span class="label">Stars: </span> {{getDetail('Actors', 'actors')}}</p>
+          <p *ngIf="movieDetails?.imdbID || movieDetails?.tomatoURL || movieDetails?.Website">
+            <span class="label">External Links: </span>
+            <span *ngIf="movieDetails?.imdbID">
+              <a target="_blank" href="http://http://www.imdb.com/title/{{movieDetails?.imdbID}}">
+                <img src="../../../../assets/images/imdb.png">
+              </a>
+            </span>
+            <span *ngIf="movieDetails?.tomatoURL && movieDetails?.tomatoURL !== 'N/A'">
+              <a target="_blank" href="{{movieDetails?.tomatoURL}}">
+                <img src="../../../../assets/images/rt.png" height="25">
+              </a>
+            </span>
+            <span *ngIf="movieDetails?.Website && movieDetails?.Website !== 'N/A'">
+              <a target="_blank" href="{{movieDetails?.Website}}">
+                <img src="../../../../assets/images/w.png">
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="filming_locations" *ngIf="movie.locations.length">
+      <div class="row">
+        <div class="col col-sm-4">
+          <h2>Filming Locations:</h2>
+          <ul>
+            <li *ngFor="let item of movie.locations">{{item}}</li>
+          </ul>
+        </div>
+        <div class="col col-sm-8">
+          <app-map *ngIf="movie?.coordinates?.length > 0" [markers]="movie.coordinates"></app-map>
+        </div>
+      </div>
+    </div>
+
+    <div class="details_section">
+      <h2>Details</h2>
+      <p *ngIf="movieDetails?.Rated"><span class="label">Rated: </span> {{movieDetails?.Rated}}</p>
+      <p *ngIf="movieDetails?.Country"><span class="label">Countries: </span> {{movieDetails?.Country}}</p>
+      <p *ngIf="movieDetails?.Language"><span class="label">Languages: </span> {{movieDetails?.Language}}</p>
+      <p *ngIf="getDetail('Released', 'release_year')"><span class="label">Release Date: </span> {{getDetail('Released', 'release_year')}}</p>
+      <p *ngIf="movieDetails?.Awards"><span class="label">Awards: </span> {{movieDetails?.Awards}}</p>
+      <p *ngIf="movieDetails?.BoxOffice"><span class="label">Box Office: </span> {{movieDetails?.BoxOffice}}</p>
+      <p *ngIf="movieDetails?.DVD"><span class="label">DVD: </span> {{movieDetails?.DVD}}</p>
+      <p *ngIf="getDetail('Production', 'production_company')">
+        <span class="label">Production: </span>{{getDetail('Production', 'production_company')}}
+      </p>
+      <p *ngIf="movie?.distributor"><span class="label">Distributor: </span> {{movie?.distributor}}</p>
+      <div *ngIf="movie?.fun_facts?.length">
+        <h3>Fun Facts: </h3>
+        <ul>
+          <li *ngFor="let item of movie.fun_facts">{{item}}</li>
+        </ul>
+      </div>
+      <div *ngIf="movieDetails?.tomatoConsensus && movieDetails?.tomatoConsensus !== 'N/A'">
+        <h3>tomato Consensus: </h3>
+        <p>{{movieDetails?.tomatoConsensus}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-footer></app-footer>

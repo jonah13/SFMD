@@ -1,0 +1,36 @@
+.movieItem {
+  margin-bottom: 10px;
+  a.title {
+    color: #fff;
+    text-transform: uppercase;
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+      color: #ff543e;
+    }
+  }
+  .details {
+    margin: 10px 0 20px;
+    border: 1px solid #4b4b4b;
+    color: #a0A0A0;
+    width: 90%;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 30px;
+    dl {
+      margin: 0;
+      padding: 10px 10px 0;
+      dt {
+        display: inline;
+        color: #fff;
+        letter-spacing: 2px;
+      }
+      dd {
+        display: inline;
+      }
+    }
+    a.moreButton {
+      float: right;
+      margin-right: 20px;
+    }
+  }
+}

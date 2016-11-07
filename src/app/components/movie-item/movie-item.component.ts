@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-movie-item',
-  templateUrl: './movie-item.component.html'
+  templateUrl: './movie-item.component.html',
+  styleUrls: ['../../../assets/styles/components/movie-item.component.scss']
 })
 export class MovieItemComponent {
   @Input() movie: any = null;

@@ -1,0 +1,33 @@
+<footer>
+  <div class="wrapper">
+    <div class="row">
+      <div class="col col-sm-3">
+        <ul class="footer_menu">
+          <li><a href="#" routerLink="/home">Home</a></li>
+          <li><a href="#" routerLink="/movies">Browse Movies List</a></li>
+        </ul>
+      </div>
+      <div class="col col-sm-5">
+        <div class="logo">
+          <img src="../../assets/images/logo.jpg" alt="San Francisco" />
+          <p>Movies Portal</p>
+        </div>
+      </div>
+      <div class="col col-sm-4">
+        <p class="disclaimer">
+          This little project was done by <a href="https://ma.linkedin.com/in/younes-dagana-04012557" target="_blank">Younes Dagana</a>
+          to showcase a bit of what Angular 2 can do. <br>
+          The movies data is provided by
+          <a href="https://data.sfgov.org/Culture-and-Recreation/Film-Locations-in-San-Francisco/yitu-d5am" target="_blank">
+            SF OpenData API</a>,
+          <a href="http://www.omdbapi.com" target="_blank">OMDB API</a> and Google maps API.<br>
+          Find the source code for this project can be found on <a href="https://github.com/jonah13/SFMD" target="_blank">Github</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="SF_map">
+    <div class="overlay"></div>
+    <app-map [centerLat]="37.7718135" [centerLng]="-122.4197062"></app-map>
+  </div>
+</footer>

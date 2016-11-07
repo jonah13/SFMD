@@ -1,4 +1,4 @@
-<sebm-google-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom">
+<sebm-google-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [scrollwheel]="false">
   <sebm-google-map-marker *ngFor="let marker of markers"
     [latitude]="marker.lat" [longitude]="marker.lng" [iconUrl]="'../../assets/images/pin.png'">
   </sebm-google-map-marker>
